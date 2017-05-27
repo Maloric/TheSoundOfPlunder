@@ -1,5 +1,5 @@
 import { Testability } from '@angular/core/core';
-import { AppState } from '../app.state';
+import { AppState } from '../../app.state';
 import { Action } from '@ngrx/store';
 
 export const LOG_EVENT = 'LOG_EVENT';

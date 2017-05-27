@@ -24,13 +24,15 @@
     "@ngrx/core": "^1.2.0",
     "@ngrx/store": "^2.2.2",
     "core-js": "^2.4.1",
+    "karma-jasmine-diff-reporter": "^1.0.0",
+    "karma-mocha-reporter": "^2.2.3",
     "ngrx-store-freeze": "^0.1.9",
     "pusher-data-stream": "https://github.com/pusher-community/pusher-datasource-api",
     "rxjs": "^5.1.0",
     "zone.js": "^0.8.4"
   },
   "devDependencies": {
-    "@angular/cli": "1.0.4",
+    "@angular/cli": "1.0.0",
     "@angular/compiler-cli": "^4.0.0",
     "@types/jasmine": "2.5.38",
     "@types/node": "^6.0.73",
@@ -45,6 +47,7 @@
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
     "protractor": "~5.1.0",
+    "reflect-metadata": "^0.1.10",
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",
     "typescript": "~2.2.0"

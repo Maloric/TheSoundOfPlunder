@@ -1,6 +1,6 @@
 import { DashboardViewModel } from './dashboard.viewmodel';
 import { Component, OnInit } from '@angular/core';
-import { AppState } from '../app.state';
+import { AppState } from '../../app.state';
 
 @Component({
   selector: 'app-dashboard',

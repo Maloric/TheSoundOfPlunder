@@ -1,5 +1,6 @@
-import { LogState } from 'app/log/log.reducer';
 import { Action } from '@ngrx/store';
+
+import { LogState } from 'app/components/log';
 
 export interface AppState {
     log: LogState;

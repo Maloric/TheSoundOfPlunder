@@ -1,4 +1,3 @@
-import { DashboardViewModel } from './dashboard/dashboard.viewmodel';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -8,8 +7,8 @@ import { StoreModule } from '@ngrx/store';
 import { AppComponent } from './app.component';
 import { AppReducer } from './app.reducers';
 import { AppState } from './app.state';
-import { LogComponent } from './log/log.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { LogComponent } from './components/log/log.component';
+import { DashboardComponent, DashboardViewModel } from './pages/dashboard';
 
 require('../assets/signalr/jquery-1.6.4.js');
 require('../assets/signalr/jquery.signalR.js');
