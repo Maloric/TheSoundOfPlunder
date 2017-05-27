@@ -3,10 +3,6 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
-import { AppState } from './app.state';
-import { Globals } from './globals';
-import { LOG_EVENT } from './components/log';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
