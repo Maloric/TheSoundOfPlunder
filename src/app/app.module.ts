@@ -1,3 +1,4 @@
+import { SignalRService } from './services/signalr/signalrService';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -9,10 +10,6 @@ import { AppReducer } from './app.reducers';
 import { AppState } from './app.state';
 import { LogComponent } from './components/log/log.component';
 import { DashboardComponent, DashboardViewModel } from './pages/dashboard';
-
-require('app/services/signalr/lib/jquery-1.6.4.js');
-require('app/services/signalr/lib/jquery.signalR.js');
-require('app/services/signalr/lib/hubs.js');
 
 @NgModule({
   declarations: [
@@ -27,7 +24,8 @@ require('app/services/signalr/lib/hubs.js');
     StoreModule.provideStore(AppReducer)
   ],
   providers: [
-    DashboardViewModel
+    DashboardViewModel,
+    SignalRService
   ],
   bootstrap: [
     AppComponent

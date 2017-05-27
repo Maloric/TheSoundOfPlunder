@@ -10,7 +10,6 @@ import { AppState } from '../../app.state';
 export class DashboardComponent implements OnInit {
 
   constructor(private viewModel: DashboardViewModel) {
-
   }
 
   ngOnInit() {

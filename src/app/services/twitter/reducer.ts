@@ -10,7 +10,7 @@ export const InitialTweetState: TweetState = {
     tweets: []
 };
 
-export function TwitterReducer(state: TweetState, action: Action): TweetState {
+export function TwitterReducer(state: TweetState = InitialTweetState, action: Action): TweetState {
     switch (action.type) {
         case LOG_TWEET:
             const newState = Object.assign({}, state, {
@@ -19,6 +19,7 @@ export function TwitterReducer(state: TweetState, action: Action): TweetState {
             if (newState.tweets.length > 100) {
                 newState.tweets = newState.tweets.slice(1, 102);
             }
+            // console.log('newState', newState);
             return newState;
         default:
             return state;

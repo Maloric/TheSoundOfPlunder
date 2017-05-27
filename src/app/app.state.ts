@@ -1,9 +1,9 @@
 import { Action } from '@ngrx/store';
 
-import { TwitterReducer } from 'app/services/twitter';
+import { TwitterReducer, TweetState } from 'app/services/twitter';
 
 export interface AppState {
-    twitter: TwitterReducer;
+    twitter: TweetState;
 };
 
 type Reducer<AppStateType> = {
