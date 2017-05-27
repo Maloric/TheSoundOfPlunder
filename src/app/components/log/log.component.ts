@@ -8,7 +8,7 @@ import { Store } from '@ngrx/store';
   styleUrls: ['./log.component.scss']
 })
 export class LogComponent {
-  @Input() lastMsg: any;
+  @Input() tweets: any;
 
   constructor() {
 

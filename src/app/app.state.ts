@@ -1,9 +1,9 @@
 import { Action } from '@ngrx/store';
 
-import { LogState } from 'app/components/log';
+import { TwitterReducer } from 'app/services/twitter';
 
 export interface AppState {
-    log: LogState;
+    twitter: TwitterReducer;
 };
 
 type Reducer<AppStateType> = {

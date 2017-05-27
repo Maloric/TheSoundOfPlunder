@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'app/app.state';
-import { LOG_EVENT } from 'app/components/log';
+import { LOG_TWEET } from 'app/services/twitter';
 
 @Injectable()
 export class SignalRService {
@@ -17,8 +17,7 @@ export class SignalRService {
         };
 
         this.twitterHub.client.updateTweet = (tweet) => {
-            console.log('updateTweet', tweet);
-            this.store.dispatch({ type: LOG_EVENT, payload: tweet });
+            this.store.dispatch({ type: LOG_TWEET, payload: tweet });
         };
     }
 }

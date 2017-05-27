@@ -10,9 +10,9 @@ import { AppState } from './app.state';
 import { LogComponent } from './components/log/log.component';
 import { DashboardComponent, DashboardViewModel } from './pages/dashboard';
 
-require('../assets/signalr/jquery-1.6.4.js');
-require('../assets/signalr/jquery.signalR.js');
-require('../assets/signalr/hubs.js');
+require('app/services/signalr/lib/jquery-1.6.4.js');
+require('app/services/signalr/lib/jquery.signalR.js');
+require('app/services/signalr/lib/hubs.js');
 
 @NgModule({
   declarations: [

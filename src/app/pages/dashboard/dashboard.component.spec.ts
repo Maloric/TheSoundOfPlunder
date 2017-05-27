@@ -13,26 +13,26 @@ describe('DashboardComponent', () => {
 
 
   let mockViewModelData: {
-    lastMsg: any
+    tweets: any
   };
   let viewModel: any;
   let pageStateSubject$: ReplaySubject<any>;
 
   beforeEach(() => {
     mockViewModelData = {
-      lastMsg: { some: 'message' }
+      tweets: { some: 'message' }
     };
 
     pageStateSubject$ = new ReplaySubject<any>();
 
     viewModel = {
-      lastMsg$: pageStateSubject$.map(x => x.lastMg)
+      tweets$: pageStateSubject$.map(x => x.tweets)
     };
 
     TestBed.configureTestingModule({
       declarations: [
         DashboardComponent,
-        MakeTestComponent('mockLogComponent', 'app-log', ['lastMsg'])
+        MakeTestComponent('mockLogComponent', 'app-log', ['tweets'])
       ], providers: [
         {
           provide: DashboardViewModel,
@@ -53,5 +53,20 @@ describe('DashboardComponent', () => {
 
   it('should be created', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should pass the tweets array to the log component', () => {
+    mockViewModelData.tweets = [{
+      id: 'tweet1'
+    }, {
+      id: 'tweet2'
+    }];
+
+    refresh();
+
+    const logComponent = fixture.debugElement.query(q => q.name === 'app-log');
+    expect(logComponent).toBeDefined();
+
+    expect(logComponent.componentInstance.tweets).toEqual(mockViewModelData.tweets);
   });
 });

@@ -8,11 +8,10 @@ import { AppState } from 'app/app.state';
 
 @Injectable()
 export class DashboardViewModel {
-    lastMsg$: Observable<any>;
+    tweets$: Observable<any>;
 
     constructor(private store: Store<AppState>) {
-        console.log(this.store);
-        this.lastMsg$ = store.select('log').map((x: any) => {
+        this.tweets$ = store.select('log').map((x: any) => {
             console.log('map', x);
             return x.lastMsg;
         });

@@ -1,9 +1,9 @@
-import { type } from 'os';
-import { SignalRService } from './signalrService';
 import { Store } from '@ngrx/store';
 import { async, inject, TestBed } from '@angular/core/testing';
 
-import { LOG_EVENT } from '../../components/log';
+import { LOG_TWEET } from 'app/services/twitter';
+
+import { SignalRService } from './signalrService';
 
 require('./lib/jquery-1.6.4.js');
 require('./lib/jquery.signalR.js');
@@ -49,14 +49,12 @@ describe('The SignalR service', () => {
                 twitterHub.client.updateTweet(tweet);
             });
 
-            it('set the lastMsg property with the contents of the tweet', () => {
+            it('dispatches the LOG_TWEET action with the tweet data', () => {
                 expect(mockStore.dispatch).toHaveBeenCalledWith({
-                    type: LOG_EVENT,
+                    type: LOG_TWEET,
                     payload: tweet
                 });
             });
         });
     });
-
-
 });
