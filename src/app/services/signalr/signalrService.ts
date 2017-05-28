@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'app/app.state';
 import { LOG_TWEET } from 'app/services/twitter';
@@ -10,30 +10,36 @@ require('app/services/signalr/lib/hubs.js');
 @Injectable()
 export class SignalRService {
     private twitterHub: any;
-    constructor(private store: Store<AppState>) {
+    constructor(private store: Store<AppState>, private _ngZone: NgZone) {
         const $ = (<any>window).$;
         this.twitterHub = $.connection.twitterHub;
     };
 
     start() {
-        // console.log('start');
+        this.twitterHub.client.updateStatus = (status) => {
+            console.log('Live signalR Twitter stream status:', status);
+        };
+
+        this.twitterHub.client.updateTweet = (tweet) => {
+            this._ngZone.run(() => this.updateTweet(tweet));;
+        };
+
         const $ = (<any>window).$;
         $.connection.hub.start().done(() => {
             this.serviceStarted();
         });
-
-        this.twitterHub.client.updateStatus = (status) => {
-            console.log('status', status);
-        };
-
-        this.twitterHub.client.updateTweet = (tweet) => {
-            console.log('updateTweet', tweet);
-            this.store.dispatch({ type: LOG_TWEET, payload: tweet });
-        };
     }
 
     serviceStarted() {
-        // console.log('service started');
         (<any>window).$.connection.twitterHub.server.startTwitterLive();
+    }
+
+    updateTweet(tweet: any) {
+        this.store.dispatch({ type: LOG_TWEET, payload: tweet });
+        this.store.dispatch({
+            type: LOG_TWEET, payload: {
+                id: Math.random()
+            }
+        });
     }
 }
