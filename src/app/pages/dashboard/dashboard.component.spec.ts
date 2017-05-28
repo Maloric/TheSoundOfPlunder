@@ -32,7 +32,8 @@ describe('DashboardComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         DashboardComponent,
-        MakeTestComponent('mockLogComponent', 'app-log', ['tweets'])
+        MakeTestComponent('mockLogComponent', 'app-log', ['tweets']),
+        MakeTestComponent('mockFeedComponent', 'app-twitter-feed', ['tweets'])
       ], providers: [
         {
           provide: DashboardViewModel,
@@ -55,7 +56,7 @@ describe('DashboardComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should pass the tweets array to the log component', () => {
+  it('should pass the tweets array to the log component and twitter-feed component', () => {
     mockViewModelData.tweets = [{
       id: 'tweet1'
     }, {
@@ -65,8 +66,11 @@ describe('DashboardComponent', () => {
     refresh();
 
     const logComponent = fixture.debugElement.query(q => q.name === 'app-log');
+    const twitterFeedComponent = fixture.debugElement.query(q => q.name === 'app-twitter-feed');
     expect(logComponent).toBeDefined();
+    expect(twitterFeedComponent).toBeDefined();
 
     expect(logComponent.componentInstance.tweets).toEqual(mockViewModelData.tweets);
+    expect(twitterFeedComponent.componentInstance.tweets).toEqual(mockViewModelData.tweets);
   });
 });

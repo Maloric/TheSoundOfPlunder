@@ -10,9 +10,9 @@ import { AppState } from 'app/app.state';
 @Injectable()
 export class DashboardViewModel {
     tweets$: Observable<any> = this.store.select('twitter').map((x: TweetState) => {
-        // console.log('x', x);
         return x.tweets;
-    });
+    }).publishReplay(1)
+        .refCount();
 
     constructor(private store: Store<AppState>) { }
 }

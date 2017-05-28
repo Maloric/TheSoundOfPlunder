@@ -1,0 +1,5 @@
+<p *ngIf="!tweets || tweets.length === 0">
+  Waiting for Twitter stream...
+</p>
+
+<div class="tweet" *ngFor="let tweet of tweets" [innerHtml]="tweet.HTML"></div>

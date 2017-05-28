@@ -15,6 +15,6 @@ export class LogComponent implements OnChanges {
   }
 
   ngOnChanges(x: any): void {
-    console.log('ngOnChanges', x);
+    // console.log('ngOnChanges', x);
   }
 }

@@ -1,0 +1,20 @@
+import { OnChanges } from '@angular/core/core';
+import { Component, Input, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-twitter-feed',
+  templateUrl: './twitter-feed.component.html',
+  styleUrls: ['./twitter-feed.component.scss']
+})
+export class TwitterFeedComponent implements OnChanges {
+
+  @Input()
+  tweets: any[];
+
+  constructor() { }
+
+  ngOnChanges() {
+    console.log(this.tweets);
+  }
+
+}

@@ -36,10 +36,5 @@ export class SignalRService {
 
     updateTweet(tweet: any) {
         this.store.dispatch({ type: LOG_TWEET, payload: tweet });
-        this.store.dispatch({
-            type: LOG_TWEET, payload: {
-                id: Math.random()
-            }
-        });
     }
 }

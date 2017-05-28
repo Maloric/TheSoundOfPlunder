@@ -9,13 +9,15 @@ import { AppComponent } from './app.component';
 import { AppReducer } from './app.reducers';
 import { AppState } from './app.state';
 import { LogComponent } from './components/log/log.component';
+import { TwitterFeedComponent } from './components/twitter-feed';
 import { DashboardComponent, DashboardViewModel } from './pages/dashboard';
 
 @NgModule({
   declarations: [
     AppComponent,
     LogComponent,
-    DashboardComponent
+    DashboardComponent,
+    TwitterFeedComponent
   ],
   imports: [
     BrowserModule,
