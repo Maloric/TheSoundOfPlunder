@@ -5,11 +5,11 @@ import { ReplaySubject } from 'rxjs/Rx';
 
 import { MakeTestComponent } from '../../helpers/testHelpers';
 
-import { DashboardComponent } from './dashboard.component';
+import { DashboardPageComponent } from './dashboard.page';
 
-describe('DashboardComponent', () => {
-  let component: DashboardComponent;
-  let fixture: ComponentFixture<DashboardComponent>;
+describe('DashboardPageComponent', () => {
+  let component: DashboardPageComponent;
+  let fixture: ComponentFixture<DashboardPageComponent>;
 
   let mockViewModelData: {
     tweets: any
@@ -30,8 +30,7 @@ describe('DashboardComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [
-        DashboardComponent,
-        MakeTestComponent('mockLogComponent', 'app-log', ['tweets']),
+        DashboardPageComponent,
         MakeTestComponent('mockFeedComponent', 'app-twitter-feed', ['tweets'])
       ], providers: [
         {
@@ -41,7 +40,7 @@ describe('DashboardComponent', () => {
       ]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(DashboardComponent);
+    fixture = TestBed.createComponent(DashboardPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -55,7 +54,7 @@ describe('DashboardComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should pass the tweets array to the log component and twitter-feed component', () => {
+  it('should pass the tweets array to the twitter-feed component', () => {
     mockViewModelData.tweets = [{
       id: 'tweet1'
     }, {
@@ -64,12 +63,8 @@ describe('DashboardComponent', () => {
 
     refresh();
 
-    const logComponent = fixture.debugElement.query(q => q.name === 'app-log');
     const twitterFeedComponent = fixture.debugElement.query(q => q.name === 'app-twitter-feed');
-    expect(logComponent).toBeDefined();
     expect(twitterFeedComponent).toBeDefined();
-
-    expect(logComponent.componentInstance.tweets).toEqual(mockViewModelData.tweets);
     expect(twitterFeedComponent.componentInstance.tweets).toEqual(mockViewModelData.tweets);
   });
 });

@@ -10,13 +10,13 @@ import { AppReducer } from './app.reducers';
 import { AppState } from './app.state';
 import { LogComponent } from './components/log/log.component';
 import { TwitterFeedComponent } from './components/twitter-feed';
-import { DashboardComponent, DashboardViewModel } from './pages/dashboard';
+import { DashboardPageComponent, DashboardViewModel } from './pages/dashboard';
 
 @NgModule({
   declarations: [
     AppComponent,
     LogComponent,
-    DashboardComponent,
+    DashboardPageComponent,
     TwitterFeedComponent
   ],
   imports: [
