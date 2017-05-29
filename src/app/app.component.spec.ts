@@ -1,5 +1,5 @@
-import { RouterTestingModule } from '@angular/router/testing';
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { AppComponent } from 'app/app.component';
 import { MakeTestComponent } from 'app/helpers/testHelpers';

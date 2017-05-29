@@ -3,5 +3,5 @@
 </p>
 
 <div *ngIf="tweets">
-  <div class="tweet" *ngFor="let tweet of tweets.slice().reverse()" [innerHtml]="tweet.HTML"></div>
+  <div class="tweet" *ngFor="let tweet of tweets.slice().reverse()" [innerHtml]="tweet.html" [routerLink]="['/log', tweet.id]"></div>
 </div>

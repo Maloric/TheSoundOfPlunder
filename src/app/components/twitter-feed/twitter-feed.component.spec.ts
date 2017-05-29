@@ -1,5 +1,6 @@
 import { DebugElement } from '@angular/core/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { TwitterFeedComponent } from './twitter-feed.component';
 
@@ -10,7 +11,8 @@ describe('TwitterFeedComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [TwitterFeedComponent]
+      declarations: [TwitterFeedComponent],
+      imports: [RouterTestingModule]
     })
       .compileComponents();
   }));
@@ -34,23 +36,23 @@ describe('TwitterFeedComponent', () => {
       tweets = [
         {
           this: 'thing1',
-          HTML: '<div>test1</div>'
+          html: '<div>test1</div>'
         },
         {
           this: 'thing2',
-          HTML: '<div><strong>test2</strong></div>'
+          html: '<div><strong>test2</strong></div>'
         },
         {
           this: 'thing3',
-          HTML: '<div><strong>test3</strong></div>'
+          html: '<div><strong>test3</strong></div>'
         },
         {
           this: 'thing4',
-          HTML: '<div><strong>test4</strong></div>'
+          html: '<div><strong>test4</strong></div>'
         },
         {
           this: 'thing5',
-          HTML: '<div><strong>test5</strong></div>'
+          html: '<div><strong>test5</strong></div>'
         }
       ];
       component.tweets = tweets;
@@ -65,7 +67,7 @@ describe('TwitterFeedComponent', () => {
     it('should display one panel for each tweet (in reverse order)', () => {
       expect(tweetPanels.length).toEqual(tweets.length);
       for (let i = 0; i < tweets.length; i++) {
-        expect(tweetPanels[tweets.length - i - 1].innerHTML).toEqual(tweets[i].HTML)
+        expect(tweetPanels[tweets.length - i - 1].innerHTML).toEqual(tweets[i].html)
       }
     });
 

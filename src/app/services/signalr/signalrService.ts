@@ -21,6 +21,7 @@ export class SignalRService {
         };
 
         this.twitterHub.client.updateTweet = (tweet) => {
+            // console.log('updateTweet', tweet);
             this._ngZone.run(() => this.updateTweet(tweet));;
         };
 

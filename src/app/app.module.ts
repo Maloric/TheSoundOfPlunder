@@ -17,6 +17,7 @@ import {
   LogPageComponent,
   PageNotFoundComponent,
   DashboardViewModel,
+  LogPageRouteHandler,
   LogViewModel
 } from './pages';
 import { SignalRService } from './services/signalr/signalrService';
@@ -40,7 +41,8 @@ import { SignalRService } from './services/signalr/signalrService';
   providers: [
     DashboardViewModel,
     LogViewModel,
-    SignalRService
+    SignalRService,
+    LogPageRouteHandler
   ],
   bootstrap: [
     AppComponent
