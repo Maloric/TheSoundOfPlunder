@@ -1,9 +1,9 @@
-import { SignalRService } from './services/signalr/signalrService';
+import { RouterTestingModule } from '@angular/router/testing';
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 
 import { AppComponent } from 'app/app.component';
-import { DashboardComponent } from 'app/pages/dashboard';
 import { MakeTestComponent } from 'app/helpers/testHelpers';
+import { SignalRService } from 'app/services/signalr/signalrService';
 
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
@@ -16,11 +16,13 @@ describe('AppComponent', () => {
     mockSignalRService = jasmine.createSpyObj('mockSignalRService', ['start'])
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent,
-        MakeTestComponent('mockDashboard', 'app-dashboard')
+        AppComponent
       ],
       providers: [
         { provide: SignalRService, useValue: mockSignalRService }
+      ],
+      imports: [
+        RouterTestingModule
       ]
     }).compileComponents();
 
