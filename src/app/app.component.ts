@@ -9,8 +9,6 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'app works!';
-
   constructor(signalRService: SignalRService) {
     signalRService.start();
   }
