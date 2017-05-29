@@ -9,6 +9,6 @@ import { InsightsViewModel } from './insights.viewmodel';
 })
 export class InsightsPageComponent {
 
-  constructor(private viewModel: InsightsViewModel) { }
+  constructor(public viewModel: InsightsViewModel) { }
 
 }

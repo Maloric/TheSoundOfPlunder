@@ -1,5 +1,5 @@
 {
-  "name": "thesoundofplunder",
+  "name": "tweetsicle",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "gh": "ng build --prod --base-href \"https://maloric.github.io/TheSoundOfPlunder/\" && ngh"
+    "gh": "ng build --prod --base-href \"https://maloric.github.io/Tweetsicle/\" && ngh"
   },
   "private": true,
   "dependencies": {
@@ -24,6 +24,7 @@
     "@ngrx/core": "^1.2.0",
     "@ngrx/store": "^2.2.2",
     "core-js": "^2.4.1",
+    "d3": "^4.9.1",
     "karma-jasmine-diff-reporter": "^1.0.0",
     "karma-mocha-reporter": "^2.2.3",
     "ngrx-store-freeze": "^0.1.9",

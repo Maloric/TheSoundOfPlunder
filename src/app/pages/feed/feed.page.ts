@@ -9,6 +9,6 @@ import { FeedViewModel } from './feed.viewmodel';
 })
 export class FeedPageComponent {
 
-  constructor(private viewModel: FeedViewModel) { }
+  constructor(public viewModel: FeedViewModel) { }
 
 }

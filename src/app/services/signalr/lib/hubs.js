@@ -93,7 +93,7 @@
     return proxies;
   };
 
-  signalR.hub = $.hubConnection("http://tweetsicle.azurewebsites.net/signalr", {
+  signalR.hub = $.hubConnection("https://tweetsicle.azurewebsites.net/signalr", {
     useDefaultPath: false
   });
   $.extend(signalR, signalR.hub.createHubProxies());

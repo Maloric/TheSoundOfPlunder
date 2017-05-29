@@ -9,6 +9,6 @@ import { LogViewModel } from './log.viewmodel';
 })
 export class LogPageComponent {
 
-    constructor(private viewModel: LogViewModel) { }
+    constructor(public viewModel: LogViewModel) { }
 
 }
