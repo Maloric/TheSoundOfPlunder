@@ -27,7 +27,7 @@ describe('TwitterFeedComponent', () => {
     expect(element.textContent).toMatch(/Waiting for Twitter stream.../);
   });
 
-  describe(' when there are tweets', () => {
+  describe('when there are tweets', () => {
     let tweets: any[];
     let tweetPanels: any[];
     beforeEach(() => {
@@ -50,10 +50,10 @@ describe('TwitterFeedComponent', () => {
       expect(element.textContent).not.toMatch(/Waiting for Twitter stream.../);
     });
 
-    it('should display one panel for each tweet', () => {
+    it('should display one panel for each tweet (in reverse order)', () => {
       expect(tweetPanels.length).toEqual(tweets.length);
       for (let i = 0; i < tweets.length; i++) {
-        expect(tweetPanels[i].innerHTML).toEqual(tweets[i].HTML)
+        expect(tweetPanels[tweets.length - i - 1].innerHTML).toEqual(tweets[i].HTML)
       }
     });
 

@@ -11,7 +11,6 @@ describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
 
-
   let mockViewModelData: {
     tweets: any
   };
