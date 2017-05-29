@@ -14,7 +14,7 @@ export class TwitterFeedComponent implements OnChanges {
   constructor() { }
 
   ngOnChanges() {
-    console.log(this.tweets);
+    // console.log(this.tweets);
   }
 
 }

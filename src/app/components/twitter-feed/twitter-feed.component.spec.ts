@@ -33,12 +33,24 @@ describe('TwitterFeedComponent', () => {
     beforeEach(() => {
       tweets = [
         {
-          this: 'thing',
+          this: 'thing1',
           HTML: '<div>test1</div>'
         },
         {
-          this: 'other thing',
+          this: 'thing2',
           HTML: '<div><strong>test2</strong></div>'
+        },
+        {
+          this: 'thing3',
+          HTML: '<div><strong>test3</strong></div>'
+        },
+        {
+          this: 'thing4',
+          HTML: '<div><strong>test4</strong></div>'
+        },
+        {
+          this: 'thing5',
+          HTML: '<div><strong>test5</strong></div>'
         }
       ];
       component.tweets = tweets;
