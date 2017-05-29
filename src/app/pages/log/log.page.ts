@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AppState } from '../../app.state';
 import { LogViewModel } from './log.viewmodel';
 
 @Component({
@@ -8,12 +7,8 @@ import { LogViewModel } from './log.viewmodel';
     templateUrl: './log.page.html',
     styleUrls: ['./log.page.scss']
 })
-export class LogPageComponent implements OnInit {
+export class LogPageComponent {
 
-    constructor(private viewModel: LogViewModel) {
-    }
-
-    ngOnInit() {
-    }
+    constructor(private viewModel: LogViewModel) { }
 
 }

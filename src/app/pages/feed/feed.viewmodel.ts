@@ -9,9 +9,9 @@ import { AppState } from 'app/app.state';
 
 @Injectable()
 export class FeedViewModel {
-    tweets$: Observable<any> = this.store.select('twitter').map((x: TweetState) => {
-        return x.tweets;
-    }).publishReplay(1)
+    tweets$: Observable<any> = this.store.select('twitter')
+        .map((x: TweetState) => x.tweets)
+        .publishReplay(1)
         .refCount();
 
     constructor(private store: Store<AppState>) { }

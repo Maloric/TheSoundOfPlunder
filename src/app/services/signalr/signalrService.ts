@@ -26,7 +26,7 @@ export class SignalRService {
         };
 
         const $ = (<any>window).$;
-        $.connection.hub.start().done(() => {
+        $.connection.hub.start({ withCredentials: false }).done(() => {
             this.serviceStarted();
         });
     }

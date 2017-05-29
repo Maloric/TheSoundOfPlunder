@@ -8,10 +8,9 @@ import { AppState } from 'app/app.state';
 import { TweetState } from 'app/services/twitter/reducer';
 
 @Injectable()
-export class LogViewModel {
-    tweets$: Observable<any> = this.store.select('twitter')
-        .map((x: TweetState) => x.tweets.filter(t => t.id === x.selectedTweetId || !x.selectedTweetId))
-        .publishReplay(1)
+export class InsightsViewModel {
+    hashtags$: Observable<any> = this.store.select('twitter')
+        .map((x: TweetState) => x.hashtags).publishReplay(1)
         .refCount();
 
     constructor(private store: Store<AppState>) { }

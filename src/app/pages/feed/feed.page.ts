@@ -1,20 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AppState } from '../../app.state';
-
 import { FeedViewModel } from './feed.viewmodel';
 
 @Component({
-  selector: 'app-feed',
+  selector: 'app-feed-page',
   templateUrl: './feed.page.html',
   styleUrls: ['./feed.page.scss']
 })
-export class FeedPageComponent implements OnInit {
+export class FeedPageComponent {
 
-  constructor(private viewModel: FeedViewModel) {
-  }
-
-  ngOnInit() {
-  }
+  constructor(private viewModel: FeedViewModel) { }
 
 }
