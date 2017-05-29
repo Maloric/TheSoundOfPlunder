@@ -1,15 +1,15 @@
 import { UnusedCssNg2Visitor } from 'codelyzer/noUnusedCssRule';
-import { DashboardViewModel } from './dashboard.viewmodel';
+import { FeedViewModel } from './feed.viewmodel';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReplaySubject } from 'rxjs/Rx';
 
 import { MakeTestComponent } from '../../helpers/testHelpers';
 
-import { DashboardPageComponent } from './dashboard.page';
+import { FeedPageComponent } from './feed.page';
 
-describe('DashboardPageComponent', () => {
-  let component: DashboardPageComponent;
-  let fixture: ComponentFixture<DashboardPageComponent>;
+describe('FeedPageComponent', () => {
+  let component: FeedPageComponent;
+  let fixture: ComponentFixture<FeedPageComponent>;
 
   let mockViewModelData: {
     tweets: any
@@ -30,17 +30,17 @@ describe('DashboardPageComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [
-        DashboardPageComponent,
+        FeedPageComponent,
         MakeTestComponent('mockFeedComponent', 'app-twitter-feed', ['tweets'])
       ], providers: [
         {
-          provide: DashboardViewModel,
+          provide: FeedViewModel,
           useValue: viewModel
         }
       ]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(DashboardPageComponent);
+    fixture = TestBed.createComponent(FeedPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

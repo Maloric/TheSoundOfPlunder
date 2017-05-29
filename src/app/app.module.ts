@@ -11,25 +11,27 @@ import { AppRoutes } from './app.routes';
 import { AppState } from './app.state';
 import { LogComponent } from './components/log/log.component';
 import { TwitterFeedComponent } from './components/twitter-feed';
-import { } from './pages';
 import {
-  DashboardPageComponent,
+  FeedPageComponent,
+  FeedViewModel,
+  InsightsPageComponent,
   LogPageComponent,
-  PageNotFoundComponent,
-  DashboardViewModel,
   LogPageRouteHandler,
-  LogViewModel
+  LogViewModel,
+  PageNotFoundComponent
 } from './pages';
 import { SignalRService } from './services/signalr/signalrService';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardPageComponent,
+    FeedPageComponent,
     LogComponent,
     LogPageComponent,
     PageNotFoundComponent,
-    TwitterFeedComponent
+    TwitterFeedComponent,
+    InsightsPageComponent
   ],
   imports: [
     RouterModule.forRoot(AppRoutes),
@@ -39,7 +41,7 @@ import { SignalRService } from './services/signalr/signalrService';
     StoreModule.provideStore(AppReducer)
   ],
   providers: [
-    DashboardViewModel,
+    FeedViewModel,
     LogViewModel,
     SignalRService,
     LogPageRouteHandler

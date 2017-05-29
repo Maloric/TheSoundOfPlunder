@@ -8,7 +8,7 @@ import { Subject } from 'rxjs/Subject';
 import { AppState } from 'app/app.state';
 
 @Injectable()
-export class DashboardViewModel {
+export class FeedViewModel {
     tweets$: Observable<any> = this.store.select('twitter').map((x: TweetState) => {
         return x.tweets;
     }).publishReplay(1)
