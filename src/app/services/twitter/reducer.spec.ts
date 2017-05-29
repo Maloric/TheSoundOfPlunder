@@ -6,8 +6,19 @@ describe('TwitterReducer', () => {
     beforeEach(() => {
         state = InitialTweetState;
         mockTweet = {
-            this: 'is',
-            a: 'tweet'
+            generated: {
+                'AuthorName': 'Test',
+                'AuthorURL': 'https://twitter.com/test',
+                // tslint:disable-next-line:max-line-length
+                'HTML': '<blockquote class=\"twitter-tweet\">test</blockquote>',
+                'URL': 'https://twitter.com/test/status/123',
+                'ProviderURL': 'https://twitter.com',
+                'Width': 550,
+                'Height': 0,
+                'Version': '1.0',
+                'Type': 'rich',
+                'CacheAge': '3153600000'
+            }
         };
     });
 
@@ -26,6 +37,10 @@ describe('TwitterReducer', () => {
             expect(newState.tweets.length).toEqual(1);
             expect(newState.tweets[0]).toBe(mockTweet);
             expect(newState).not.toBe(state);
+        });
+
+        it('should add all hastags in the tweet to the store', () => {
+
         });
     });
 

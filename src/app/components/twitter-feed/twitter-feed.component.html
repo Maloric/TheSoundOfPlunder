@@ -3,5 +3,5 @@
 </p>
 
 <div *ngIf="tweets">
-  <div class="tweet" *ngFor="let tweet of tweets.reverse()" [innerHtml]="tweet.HTML"></div>
+  <div class="tweet" *ngFor="let tweet of tweets.reverse()" [innerHtml]="tweet.Generated.HTML"></div>
 </div>
