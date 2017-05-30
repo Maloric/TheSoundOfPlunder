@@ -4,7 +4,12 @@
     border: 1px solid #000;
     padding: 10px;
     .bar {
+      box-sizing: border-box;
+      width: 0;
       background: #66F;
+      margin: 0 0 1px;
+      white-space: nowrap;
+      padding: 3px;
     }
   }
 }
