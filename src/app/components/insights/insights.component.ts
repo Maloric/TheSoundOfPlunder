@@ -24,16 +24,11 @@ export class InsightsComponent implements OnChanges {
     this.updateChart();
   }
 
-  getTop10() {
-    return Object.keys(this.hashtags).sort((a, b) => this.hashtags[b] - this.hashtags[a]).slice(0, 10);
-  }
-
   updateChart() {
-    let data = this.getTop10();
     let bars = d3.select(this.chartContainer.nativeElement)
       .selectAll('div')
       .sort((a: string, b: string) => this.hashtags[b] - this.hashtags[a])
-      .data(data);
+      .data(this.keys.slice(0, 10));
 
     bars.enter()
       .append('div')
@@ -47,7 +42,7 @@ export class InsightsComponent implements OnChanges {
 
     bars.transition().style('width', (key) => {
       return this.hashtags[key] * 10 + 'px';
-    });
+    }).text(key => key);;
   }
 
 }
