@@ -21,8 +21,7 @@ import {
   LogPageComponent,
   LogPageRouteHandler,
   LogViewModel,
-  PageNotFoundComponent,
-  StartPageComponent
+  PageNotFoundComponent
 } from './pages';
 import { SignalRService } from './services/signalr/signalrService';
 
@@ -37,8 +36,7 @@ import { SignalRService } from './services/signalr/signalrService';
     TwitterFeedComponent,
     InsightsComponent,
     InsightsPageComponent,
-    StartComponent,
-    StartPageComponent
+    StartComponent
   ],
   imports: [
     RouterModule.forRoot(AppRoutes),

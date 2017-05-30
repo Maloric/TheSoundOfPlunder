@@ -12,7 +12,6 @@ export class AppComponent {
   constructor(private store: Store<AppState>) { }
 
   onQueryUpdate(query) {
-    console.log('onQueryUpdate');
     this.store.dispatch({ type: RESET });
     this.store.dispatch({ type: UPDATE_QUERY, payload: query });
   }

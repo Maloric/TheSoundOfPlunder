@@ -13,6 +13,7 @@ require('app/services/signalr/lib/hubs.js');
 export class SignalRService implements OnInit, OnDestroy {
     private twitterHub: any;
     private query$: Subscription;
+    private taskId: string;
 
     constructor(private store: Store<AppState>, private _ngZone: NgZone) {
         const $ = (<any>window).$;
@@ -20,26 +21,38 @@ export class SignalRService implements OnInit, OnDestroy {
         this.query$ = this.store.map(s => s.twitter.query)
             .filter(q => q !== '')
             .subscribe((query) => {
-                console.log('textChanged', query);
-                this.start(query);
+                if (this.taskId) {
+                    this.stop();
+                    this.serviceStarted(query);
+                } else {
+                    this.start(query);
+                }
             });
     };
 
     start(searchTerms: string) {
-        console.log(searchTerms);
-        this.twitterHub.client.updateStatus = (status) => {
+        this.twitterHub.client.updateStatus = (status: string) => {
             console.log('Live signalR Twitter stream status:', status);
         };
 
-        this.twitterHub.client.updateTweet = (tweet) => {
-            console.log('updateTweet', tweet);
-            this._ngZone.run(() => this.updateTweet(tweet));;
+        this.twitterHub.client.updateTweet = (tweet: any) => {
+            this._ngZone.run(() => this.updateTweet(tweet));
+        };
+
+        this.twitterHub.client.setTaskId = (id: string) => {
+            this.taskId = id;
         };
 
         const $ = (<any>window).$;
         $.connection.hub.start({ withCredentials: false }).done(() => {
             this.serviceStarted(searchTerms);
         });
+    }
+
+    stop() {
+        const $ = (<any>window).$;
+        (<any>window).$.connection.twitterHub.server.stopTwitterLive(this.taskId);
+        this.taskId = undefined;
     }
 
     serviceStarted(searchTerms) {

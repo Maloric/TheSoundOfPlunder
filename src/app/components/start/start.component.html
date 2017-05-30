@@ -1,2 +1,4 @@
-<input type="text" class="searchTerms" #searchTerms />
-<button (click)="textChanged()">Search</button>
+<form #searchForm (ngSubmit)="textChanged()">
+  <input type="text" class="searchTerms" #searchTerms />
+  <input type="submit" value="Search" />
+</form>

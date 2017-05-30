@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Store } from '@ngrx/store';
 import { MockComponent } from 'ng2-mock-component';
 
 import { AppComponent } from 'app/app.component';
@@ -9,8 +10,9 @@ describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
   let component: AppComponent;
   let element: any;
-
+  let mockStore: any;
   beforeEach(() => {
+    mockStore = { dispatch: jasmine.createSpy('dispatch') };
     TestBed.configureTestingModule({
       declarations: [
         AppComponent,
@@ -18,6 +20,9 @@ describe('AppComponent', () => {
       ],
       imports: [
         RouterTestingModule
+      ],
+      providers: [
+        { provide: Store, useValue: mockStore }
       ]
     }).compileComponents();
 
