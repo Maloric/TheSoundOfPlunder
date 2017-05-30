@@ -23,6 +23,7 @@
     "@angular/router": "^4.0.0",
     "@ngrx/core": "^1.2.0",
     "@ngrx/store": "^2.2.2",
+    "@types/d3": "^4.9.0",
     "core-js": "^2.4.1",
     "d3": "^4.9.1",
     "karma-jasmine-diff-reporter": "^1.0.0",

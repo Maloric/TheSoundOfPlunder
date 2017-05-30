@@ -1,0 +1,10 @@
+:host {
+  /deep/ .d3-chart {
+    background: #E0E0E0;
+    border: 1px solid #000;
+    padding: 10px;
+    .bar {
+      background: #66F;
+    }
+  }
+}
