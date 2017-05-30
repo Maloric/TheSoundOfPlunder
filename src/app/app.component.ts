@@ -1,7 +1,7 @@
-import { SignalRService } from './services/signalr/signalrService';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
+import { AppState } from 'app/app.state';
+import { RESET, UPDATE_QUERY } from 'app/services/twitter';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,11 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(signalRService: SignalRService) {
-    signalRService.start();
+  constructor(private store: Store<AppState>) { }
+
+  onQueryUpdate(query) {
+    console.log('onQueryUpdate');
+    this.store.dispatch({ type: RESET });
+    this.store.dispatch({ type: UPDATE_QUERY, payload: query });
   }
 }

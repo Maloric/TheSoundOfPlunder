@@ -3,7 +3,8 @@ import {
     InsightsPageComponent,
     LogPageComponent,
     LogPageRouteHandler,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    StartPageComponent
 } from './pages';
 
 import { Routes } from '@angular/router';

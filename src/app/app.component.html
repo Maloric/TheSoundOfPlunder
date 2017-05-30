@@ -4,4 +4,8 @@
   <a routerLink="/log" routerLinkActive="active">Log</a>
   <a routerLink="/ohnoes" routerLinkActive="active">Broken Link</a>
 </nav>
-<router-outlet></router-outlet>
+<div id="main">
+  <app-start (onTextChanged)='onQueryUpdate($event)'></app-start>
+  <router-outlet></router-outlet>
+
+</div>

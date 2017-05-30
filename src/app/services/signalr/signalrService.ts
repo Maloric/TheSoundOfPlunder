@@ -1,3 +1,5 @@
+import { Observable, Subscription } from 'rxjs/Rx';
+import { OnDestroy, OnInit } from '@angular/core/core';
 import { Injectable, NgZone } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'app/app.state';
@@ -8,34 +10,50 @@ require('app/services/signalr/lib/jquery.signalR.js');
 require('app/services/signalr/lib/hubs.js');
 
 @Injectable()
-export class SignalRService {
+export class SignalRService implements OnInit, OnDestroy {
     private twitterHub: any;
+    private query$: Subscription;
+
     constructor(private store: Store<AppState>, private _ngZone: NgZone) {
         const $ = (<any>window).$;
         this.twitterHub = $.connection.twitterHub;
+        this.query$ = this.store.map(s => s.twitter.query)
+            .filter(q => q !== '')
+            .subscribe((query) => {
+                console.log('textChanged', query);
+                this.start(query);
+            });
     };
 
-    start() {
+    start(searchTerms: string) {
+        console.log(searchTerms);
         this.twitterHub.client.updateStatus = (status) => {
             console.log('Live signalR Twitter stream status:', status);
         };
 
         this.twitterHub.client.updateTweet = (tweet) => {
-            // console.log('updateTweet', tweet);
+            console.log('updateTweet', tweet);
             this._ngZone.run(() => this.updateTweet(tweet));;
         };
 
         const $ = (<any>window).$;
         $.connection.hub.start({ withCredentials: false }).done(() => {
-            this.serviceStarted();
+            this.serviceStarted(searchTerms);
         });
     }
 
-    serviceStarted() {
-        (<any>window).$.connection.twitterHub.server.startTwitterLive();
+    serviceStarted(searchTerms) {
+        (<any>window).$.connection.twitterHub.server.startTwitterLive(searchTerms);
     }
 
     updateTweet(tweet: any) {
         this.store.dispatch({ type: LOG_TWEET, payload: tweet });
+    }
+
+    ngOnInit() {
+    }
+
+    ngOnDestroy() {
+        this.query$.unsubscribe();
     }
 }

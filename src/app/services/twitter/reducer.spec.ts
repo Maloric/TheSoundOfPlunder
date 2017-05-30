@@ -1,4 +1,4 @@
-import { LOG_TWEET, LOG_SET_ID } from './actions';
+import { LOG_TWEET, LOG_SET_ID, RESET, UPDATE_QUERY } from './actions';
 import { TwitterReducer, TweetState, InitialTweetState } from './reducer';
 
 describe('TwitterReducer', () => {
@@ -126,4 +126,39 @@ describe('TwitterReducer', () => {
       expect(newState).not.toBe(state);
     });
   });
+
+
+
+  describe('when an UPDATE_QUERY action is received', () => {
+    let newState: TweetState;
+    beforeEach(() => {
+      newState = TwitterReducer(state, {
+        type: UPDATE_QUERY,
+        payload: 'testQuery'
+      });
+    });
+
+    it('should reset the store to its initial state', () => {
+      expect(newState.query).toEqual('testQuery');
+      expect(newState).not.toBe(state);
+    });
+  });
+
+
+
+  describe('when a RESET action is received', () => {
+    let newState: TweetState;
+    beforeEach(() => {
+      newState = TwitterReducer(state, {
+        type: RESET
+      });
+    });
+
+    it('should reset the store to its initial state', () => {
+      expect(JSON.stringify(newState)).toEqual(JSON.stringify(InitialTweetState));
+      expect(newState).not.toBe(state);
+    });
+  });
+
+
 });

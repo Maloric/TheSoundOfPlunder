@@ -12,6 +12,7 @@ import { AppState } from './app.state';
 import { LogComponent } from './components/log/log.component';
 import { TwitterFeedComponent } from './components/twitter-feed';
 import { InsightsComponent } from './components/insights';
+import { StartComponent } from './components/start';
 import {
   FeedPageComponent,
   FeedViewModel,
@@ -20,7 +21,8 @@ import {
   LogPageComponent,
   LogPageRouteHandler,
   LogViewModel,
-  PageNotFoundComponent
+  PageNotFoundComponent,
+  StartPageComponent
 } from './pages';
 import { SignalRService } from './services/signalr/signalrService';
 
@@ -34,7 +36,9 @@ import { SignalRService } from './services/signalr/signalrService';
     PageNotFoundComponent,
     TwitterFeedComponent,
     InsightsComponent,
-    InsightsPageComponent
+    InsightsPageComponent,
+    StartComponent,
+    StartPageComponent
   ],
   imports: [
     RouterModule.forRoot(AppRoutes),

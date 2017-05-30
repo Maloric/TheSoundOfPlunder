@@ -1,0 +1,25 @@
+:host {
+  display: flex;
+  margin: 0 0 10px;
+  input {
+    flex: 1 0 auto;
+    display: inline-block;
+    border: 1px solid #666;
+    color: #666;
+    line-height: 30px;
+    font-size: 14px;
+    padding: 0 10px;
+  }
+  button {
+    flex: 0 0 auto;
+    display: inline-block;
+    margin: 0 0 0 10px;
+    height: 32px;
+    background: #F94;
+    border: 0;
+    cursor: pointer;
+    &:hover {
+      background: #C62;
+    }
+  }
+}

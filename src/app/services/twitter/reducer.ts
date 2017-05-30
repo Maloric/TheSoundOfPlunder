@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { LOG_SET_ID, LOG_TWEET } from './actions';
+import { LOG_SET_ID, LOG_TWEET, RESET, UPDATE_QUERY } from './actions';
 
 export class Tweet {
     id: number;
@@ -9,12 +9,15 @@ export class Tweet {
 }
 
 export class TweetState {
+    query: string;
     tweets: Tweet[];
     hashtags: { [name: string]: number };
     selectedTweetId: number;
 };
 
 export const InitialTweetState: TweetState = {
+    // query: 'twitch Twitch DnD dungeonsanddragons savageworlds crititcalrole d20',
+    query: '',
     tweets: [],
     hashtags: {},
     selectedTweetId: undefined
@@ -42,8 +45,13 @@ export function TwitterReducer(state: TweetState = InitialTweetState, action: Ac
             }
             return newState;
         case LOG_SET_ID:
-            console.log(action);
             return Object.assign({}, state, { selectedTweetId: action.payload });
+        case UPDATE_QUERY:
+            console.log('update query', action.payload);
+            return Object.assign({}, state, { query: action.payload });
+        case RESET:
+            console.log('reset');
+            return JSON.parse(JSON.stringify(InitialTweetState));
         default:
             return state;
     }
