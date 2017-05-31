@@ -1,4 +1,5 @@
 import {
+    AboutPageComponent,
     FeedPageComponent,
     InsightsPageComponent,
     LogPageComponent,
@@ -9,6 +10,7 @@ import {
 import { Routes } from '@angular/router';
 
 export const AppRoutes: Routes = [
+    { path: 'about', component: AboutPageComponent },
     { path: 'log', component: LogPageComponent },
     { path: 'log/:id', component: LogPageComponent, canActivate: [LogPageRouteHandler] },
     { path: 'feed', component: FeedPageComponent },

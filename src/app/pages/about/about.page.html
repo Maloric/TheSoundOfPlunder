@@ -1,0 +1,42 @@
+<h1>About Tweetsicle</h1>
+<h2>Technologies Used</h2>
+<ul>
+  <li>SignalR</li>
+  <li>Angular4</li>
+  <li>RxJS</li>
+  <li>ngrx/store</li>
+</ul>
+
+<p>Tweetsicle provides real a real time Twitter feed from Twitter's streaming API and serves this to an Angular client via SignalR.
+  The user can provide a series of search terms, separated by spaces, and the API will return every tweet with hash tags
+  that match the query.</p>
+<p>For instance, try searching for "trump Trump TRUMP". The twitter API treats hashtags as case sensitive, so Tweetsicle does
+  likewise.
+</p>
+<p>Searching for a new term will clear the store and start streaming tweets that match the new query instead.</p>
+
+<h2>Pages</h2>
+<h3>Feed</h3>
+<p>The Feed page displays each new tweet in real time. Clicking on a tweet will take you to the raw JSON data that was received
+  from the API for that tweet.</p>
+<h3>Insights</h3>
+<p>The Insights page displays a chart of the top 10 hashtags in the matching tweets, filtering out the hashtags you searched
+  for. It also displays the raw hashtag counts beneath the chart so you can verify the data.</p>
+
+<h3>Log</h3>
+<p>The log page displays the raw results that comes back from the API.</p>
+
+<h3>Broken Link</h3>
+<p>This is simply here to demonstrate the router working as its supposed to.</p>
+
+<h2>Known Issues</h2>
+<p>The API uses the TweetInvi library, but is fairly crude and untested. It occasionally has issues where it does not return
+  any Tweets. I have so far been unable to determine the cause, although it seems to correct itself in time. It appears to
+  be something in the handler for tweets received from the Twitter API, as the service sends a "started" response to the
+  client, so is clearly running. Chances are that an exception is being swallowed by a separate thread and thus not returning
+  the error to the client.</p>
+<p> It can also get into a state where it returns a 503 response to the client. I usually fix this by tweaking the settings in
+  Azure to force the app pool to recycle.</p>
+<p>Although the app is designed to allow the user to change search terms, I have observed issues where the previous search term
+  remains subscribed. Usually a page refresh will resolve this.</p>
+<p>The client is not nearly as thoroughly tested as I would like, nor as thoroughly styled.</p>

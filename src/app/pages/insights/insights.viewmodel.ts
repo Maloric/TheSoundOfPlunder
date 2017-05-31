@@ -14,6 +14,9 @@ export class InsightsViewModel {
             let keys = Object.keys(x.hashtags).sort((a, b) => x.hashtags[b] - x.hashtags[a]);
             let res = {};
             for (let i = 0; i < keys.length; i++) {
+                if (x.query.split(' ').indexOf(keys[i]) > -1) {
+                    continue;
+                }
                 res[keys[i]] = x.hashtags[keys[i]];
             }
             return res;

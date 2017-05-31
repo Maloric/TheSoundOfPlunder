@@ -14,6 +14,7 @@ import { TwitterFeedComponent } from './components/twitter-feed';
 import { InsightsComponent } from './components/insights';
 import { StartComponent } from './components/start';
 import {
+  AboutPageComponent,
   FeedPageComponent,
   FeedViewModel,
   InsightsPageComponent,
@@ -36,7 +37,8 @@ import { SignalRService } from './services/signalr/signalrService';
     TwitterFeedComponent,
     InsightsComponent,
     InsightsPageComponent,
-    StartComponent
+    StartComponent,
+    AboutPageComponent
   ],
   imports: [
     RouterModule.forRoot(AppRoutes),
