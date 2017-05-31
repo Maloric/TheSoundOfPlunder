@@ -5,7 +5,7 @@ import { InsightsViewModel } from './insights.viewmodel';
 @Component({
   selector: 'app-insights-page',
   templateUrl: './insights.page.html',
-  styleUrls: ['./insights.page.css']
+  styleUrls: ['./insights.page.scss']
 })
 export class InsightsPageComponent {
 

@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, ViewChild, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import * as d3 from 'd3';
 
 @Component({
@@ -14,13 +14,15 @@ export class InsightsComponent implements OnChanges {
   private chartContainer: ElementRef;
 
   @Input()
-  hashtags: { [key: string]: number }
+  hashtags: { [key: string]: number };
+
+  @Output() onBarClicked = new EventEmitter<string>();
 
   private keys: string[];
 
   constructor() { }
 
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges) {
     this.keys = Object.keys(this.hashtags);
 
     this.updateChart();
@@ -29,7 +31,6 @@ export class InsightsComponent implements OnChanges {
   updateChart() {
     let bars = d3.select(this.chartContainer.nativeElement)
       .selectAll('div')
-      .sort((a: string, b: string) => this.hashtags[b] - this.hashtags[a])
       .data(this.keys.slice(0, 10));
 
     bars.enter()
@@ -59,7 +60,6 @@ export class InsightsComponent implements OnChanges {
       return this.hashtags[key] * this.stepWidth + '%';
     }
     let width = (this.hashtags[key] / highest) * 100 * this.stepWidth;
-    // console.log(key, highest, this.hashtags[key], width);
     return width + '%';
   }
 

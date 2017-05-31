@@ -18,6 +18,7 @@
     "testTsconfig": "tsconfig.spec.json",
     "prefix": "app",
     "styles": [
+      "_variables.scss",
       "styles.scss"
     ],
     "scripts": [],
@@ -45,10 +46,17 @@
   "test": {
     "karma": {
       "config": "./karma.conf.js"
+    },
+    "codeCoverage": {
+      "exclude": [
+        "**/lib/**/*.*"
+      ]
     }
   },
   "defaults": {
-    "styleExt": "css",
-    "component": {}
+    "styleExt": "scss",
+    "component": {
+
+    }
   }
 }

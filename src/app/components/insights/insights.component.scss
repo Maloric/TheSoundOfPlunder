@@ -1,15 +1,16 @@
+@import '../../../_variables';
 :host {
   /deep/ .d3-chart {
-    background: #E0E0E0;
-    border: 1px solid #000;
+    background: #F0F0F0;
+    border: 1px solid #CCC;
     padding: 10px;
     .bar {
       box-sizing: border-box;
       width: 0;
-      background: #66F;
+      background: adjust-hue( $highlight, 180%);
       margin: 0 0 1px;
       white-space: nowrap;
-      padding: 3px;
+      padding: 10px;
     }
   }
 }

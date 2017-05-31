@@ -53,27 +53,46 @@ describe('Insights page - view model', () => {
             });
         });
 
-        describe('when a second tweet is received with new or existing hashtags', () => {
+        describe('when subsequent tweets are received with new or existing hashtags', () => {
             let mockTweet2: Tweet;
+            let mockTweet3: Tweet;
             beforeEach(() => {
                 mockTweet2 = {
                     id: 456,
-                    hashtags: ['test1', 'test3'],
+                    hashtags: ['test2', 'test3'],
                     html: 'test2'
                 };
+                mockTweet3 = {
+                    id: 789,
+                    hashtags: ['test2', 'test3'],
+                    html: 'test3'
+                };
                 store.dispatch({ type: LOG_TWEET, payload: mockTweet2 });
+                store.dispatch({ type: LOG_TWEET, payload: mockTweet3 });
             });
 
-            it('should update the existing hashtags and add the new ones', (done) => {
+            it('should update the existing hashtags', (done) => {
                 unit.hashtags$.subscribe((hashtags: { [key: string]: number }) => {
                     let keys = Object.keys(hashtags);
 
                     expect(keys).toBeDefined();
-                    expect(keys.length).toEqual(3);
+                    expect(keys.length).toEqual(3, 'The correct number of hashtags are present');
 
-                    expect(hashtags.test1).toEqual(2);
-                    expect(hashtags.test2).toEqual(1);
-                    expect(hashtags.test3).toEqual(1);
+                    expect(hashtags.test1).toEqual(1);
+                    expect(hashtags.test2).toEqual(3);
+                    expect(hashtags.test3).toEqual(2);
+
+                    done();
+                });
+            });
+
+            it('should order the hashtags by most popular to least popular', (done) => {
+                unit.hashtags$.subscribe((hashtags: { [key: string]: number }) => {
+                    let keys = Object.keys(hashtags);
+
+                    expect(keys[0]).toEqual('test2');
+                    expect(keys[1]).toEqual('test3');
+                    expect(keys[2]).toEqual('test1');
 
                     done();
                 });

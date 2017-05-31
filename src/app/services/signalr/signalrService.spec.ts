@@ -1,78 +1,136 @@
-import { Store } from '@ngrx/store';
+import { Tweet } from '../twitter/reducer';
+import { BrowserModule } from '@angular/platform-browser';
+import { Store, StoreModule } from '@ngrx/store';
 import { async, inject, TestBed } from '@angular/core/testing';
 
-import { LOG_TWEET } from 'app/services/twitter';
+import { LOG_TWEET, UPDATE_QUERY } from 'app/services/twitter';
 
 import { SignalRService } from './signalrService';
+import { AppState } from 'app/app.state';
+import { ReplaySubject } from 'rxjs/Rx';
+import { AppReducer } from 'app/app.reducers';
+import { NgZone } from '@angular/core';
+
+require('app/services/signalr/lib/jquery-1.6.4.js');
+require('app/services/signalr/lib/jquery.signalR.js');
+require('app/services/signalr/lib/hubs.js');
 
 describe('The SignalR service', () => {
-    let mockStore: any;
+    let store: Store<AppState>;
+    let mockZone: NgZone;
+
     const $ = (<any>window).$;
     const twitterHub = $.connection.twitterHub;
     let unit: SignalRService;
 
-    let mockHubStart: any;
-    let mockTwitterStart: any;
+    let hubStartSpy: any;
+
+    let mockTwitterHub = {
+        client: {},
+        server: {
+            startTwitterLive: jasmine.createSpy('startTwitterLiveSpy'),
+            stopTwitterLive: jasmine.createSpy('stopTwitterLiveSpy')
+        }
+    }
+    let startTwitterLiveSpy: any;
 
     beforeEach(() => {
-        // intialize mocks
-        mockStore = { dispatch: jasmine.createSpy('dispatch') };
         TestBed.configureTestingModule({
+            imports: [
+                StoreModule.provideStore(AppReducer),
+                BrowserModule
+            ],
             providers: [
-                // dependencies
-                SignalRService,
-                { provide: Store, useValue: mockStore }
+                SignalRService
+
             ]
         });
     });
 
-    beforeEach(async(inject([SignalRService], (sut: SignalRService) => {
-        unit = sut;
-    })));
+    beforeEach(inject([Store, NgZone],
+        (str: Store<AppState>, zone: NgZone) => {
+            store = str;
+            mockZone = zone;
+            unit = new SignalRService(store, mockZone);
 
-    // describe('when the service is started', () => {
-    //     beforeEach(() => {
-    //         unit.serviceStarted();
-    //     });
+            hubStartSpy = spyOn($.connection.hub, 'start').and.returnValue({
+                done: ((callback: any) => {
+                    callback();
+                })
+            });
+            $.connection.twitterHub = mockTwitterHub;
+        }));
 
-    //     it('should set up the client callbacks', () => {
-    //         expect(twitterHub.client.updateTweet).toBeDefined();
-    //     });
+    describe('when the query is updated with an empty query', () => {
+        beforeEach(() => {
+            store.dispatch({
+                type: UPDATE_QUERY,
+                payload: ''
+            });
+        });
+        it('does nothing', () => {
+            expect(hubStartSpy).not.toHaveBeenCalled();
+        });
+    });
 
-    //     describe('and a new tweet arrives via signalR', () => {
-    //         let tweet: any;
-    //         beforeEach(() => {
-    //             tweet = {
-    //                 test: 'data'
-    //             };
-    //             twitterHub.client.updateTweet(tweet);
-    //         });
+    describe('when the query is updated with a non-empty query', () => {
+        beforeEach(() => {
+            store.dispatch({
+                type: UPDATE_QUERY,
+                payload: 'test'
+            });
+        });
+        it('starts signalR', () => {
+            expect(hubStartSpy).toHaveBeenCalled();
+            expect(hubStartSpy).toHaveBeenCalledWith({ withCredentials: false });
+            expect(mockTwitterHub.server.startTwitterLive).toHaveBeenCalled();
+            expect(mockTwitterHub.server.startTwitterLive).toHaveBeenCalledTimes(1);
+            expect(mockTwitterHub.server.startTwitterLive).toHaveBeenCalledWith('test');
+        });
 
-    //         it('dispatches the LOG_TWEET action with the tweet data', () => {
-    //             expect(mockStore.dispatch).toHaveBeenCalledWith({
-    //                 type: LOG_TWEET,
-    //                 payload: tweet
-    //             });
-    //         });
-    //     });
-    // });
+        describe('and the query is updated again', () => {
+            beforeEach(() => {
+                hubStartSpy.calls.reset();
+                mockTwitterHub.server.startTwitterLive.calls.reset();
+                store.dispatch({
+                    type: UPDATE_QUERY,
+                    payload: 'test2'
+                });
+            });
+            it('stops the old stream and starts a new one', () => {
+                expect(hubStartSpy).not.toHaveBeenCalled();
+                expect(mockTwitterHub.server.stopTwitterLive).toHaveBeenCalled();
+                expect(mockTwitterHub.server.stopTwitterLive).toHaveBeenCalledTimes(1);
+                expect(mockTwitterHub.server.startTwitterLive).toHaveBeenCalled();
+                expect(mockTwitterHub.server.startTwitterLive).toHaveBeenCalledTimes(1);
+                expect(mockTwitterHub.server.startTwitterLive).toHaveBeenCalledWith('test2');
+            });
+        });
 
-    // describe('when the start method is called', () => {
-    //     beforeEach(() => {
-    //         mockHubStart = jasmine.createSpy('mockHubStart', (<any>window).$.connection.hub.start);
-    //         // .and.returnValue({
-    //         //     done: ((callback: any) => {
-    //         //         callback();
-    //         //     })
-    //         // });
-    //         mockTwitterStart = jasmine.createSpy('mockTwitterStart', (<any>window).$.connection.twitterHub.startTwitterLive);
-    //         unit.start();
-    //     });
+        describe('and a new tweet arrives via signalR', () => {
+            let tweet: Tweet;
+            let dispatchSpy: any;
+            let zoneSpy: any;
+            beforeEach(() => {
+                tweet = {
+                    id: 123,
+                    html: 'test',
+                    hashtags: ['test1']
+                };
 
-    //     it('should start the twitter stream', () => {
-    //         expect(mockHubStart).toHaveBeenCalled();
-    //     });
+                dispatchSpy = spyOn(store, 'dispatch');
+                zoneSpy = spyOn(mockZone, 'run').and.callFake((cb) => {
+                    cb(tweet);
+                });
+                $.connection.twitterHub.client.updateTweet(tweet);
+            });
 
-    // })
-
+            it('dispatches the LOG_TWEET action with the tweet data', () => {
+                expect(dispatchSpy).toHaveBeenCalledWith({
+                    type: LOG_TWEET,
+                    payload: tweet
+                });
+            });
+        });
+    });
 });
