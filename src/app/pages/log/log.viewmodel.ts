@@ -1,3 +1,4 @@
+import { Tweet } from '../../services/twitter/reducer';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
@@ -9,7 +10,8 @@ import { TweetState } from 'app/services/twitter/reducer';
 
 @Injectable()
 export class LogViewModel {
-    tweets$: Observable<any> = this.store.select('twitter')
+    tweets$: Observable<Tweet[]> = this.store
+        .select('twitter')
         .map((x: TweetState) => x.tweets.filter(t => t.id === x.selectedTweetId || !x.selectedTweetId))
         .publishReplay(1)
         .refCount();

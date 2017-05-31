@@ -9,7 +9,7 @@ import { TweetState } from 'app/services/twitter/reducer';
 
 @Injectable()
 export class InsightsViewModel {
-    hashtags$: Observable<any> = this.store.select('twitter')
+    hashtags$: Observable<{ [key: string]: number }> = this.store.select('twitter')
         .map((x: TweetState) => {
             let keys = Object.keys(x.hashtags).sort((a, b) => x.hashtags[b] - x.hashtags[a]);
             let res = {};
