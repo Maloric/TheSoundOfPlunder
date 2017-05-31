@@ -47,10 +47,8 @@ export function TwitterReducer(state: TweetState = InitialTweetState, action: Ac
         case LOG_SET_ID:
             return Object.assign({}, state, { selectedTweetId: action.payload });
         case UPDATE_QUERY:
-            console.log('update query', action.payload);
             return Object.assign({}, state, { query: action.payload });
         case RESET:
-            console.log('reset');
             return JSON.parse(JSON.stringify(InitialTweetState));
         default:
             return state;
