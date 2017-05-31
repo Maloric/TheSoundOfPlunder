@@ -1,31 +1,47 @@
 /* You can add global styles to this file, and also import other style files */
 
+$spacing:10px;
+$highlight: #FF9944;
 body {
   margin: 0;
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
 }
 
-nav {
+header {
+  line-height: 40px;
   width: 100%;
   background: #333;
   padding: 5px;
-  a {
+  .siteTitle {
     display: inline-block;
     color: #FFF;
-    padding: 10px;
-    text-decoration: none;
-    &.active {
-      border-bottom: 2px solid #FF9944;
-    }
-    &:hover {
-      background: #444;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    margin: 0 0 0 $spacing;
+    vertical-align: middle;
+  }
+  nav {
+    display: inline-block;
+    margin-left: $spacing;
+    a {
+      display: inline-block;
+      color: #FFF;
+      padding: $spacing;
+      text-decoration: none;
+      vertical-align: middle;
+      &.active {
+        border-bottom: 2px solid $highlight;
+      }
+      &:hover {
+        background: #444;
+      }
     }
   }
 }
 
 #main {
-  padding: 20px;
+  padding: $spacing*2;
 }
 
 @media(max-width:768px) {
@@ -33,7 +49,7 @@ nav {
     a {
       display: block;
       &.active {
-        border-left: 2px solid #FF9944;
+        border-left: 2px solid $highlight;
         border-bottom: 0;
       }
     }

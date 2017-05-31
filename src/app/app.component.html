@@ -1,10 +1,13 @@
-<nav>
-  <a routerLink="/feed" routerLinkActive="active">Live Feed</a>
-  <a routerLink="/insights" routerLinkActive="active">Insights</a>
-  <a routerLink="/log" routerLinkActive="active">Log</a>
-  <a routerLink="/about" routerLinkActive="active">About</a>
-  <a routerLink="/ohnoes" routerLinkActive="active">Broken Link</a>
-</nav>
+<header>
+  <div class="siteTitle">Tweetsicle</div>
+  <nav>
+    <a routerLink="/feed" routerLinkActive="active">Live Feed</a>
+    <a routerLink="/insights" routerLinkActive="active">Insights</a>
+    <a routerLink="/log" routerLinkActive="active">Log</a>
+    <a routerLink="/about" routerLinkActive="active">About</a>
+    <a routerLink="/ohnoes" routerLinkActive="active">Broken Link</a>
+  </nav>
+</header>
 <div id="main">
   <app-start (onTextChanged)='onQueryUpdate($event)'></app-start>
   <router-outlet></router-outlet>
