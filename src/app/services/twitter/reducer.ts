@@ -38,9 +38,9 @@ export function TwitterReducer(state: TweetState = InitialTweetState, action: Ac
             for (let i = 0; i < action.payload.hashtags.length; i++) {
                 key = action.payload.hashtags[i];
                 if (newState.hashtags[key]) {
-                    newState.hashtags[key]++;
+                    newState.hashtags[key.toLowerCase()]++;
                 } else {
-                    newState.hashtags[key] = 1;
+                    newState.hashtags[key.toLowerCase()] = 1;
                 }
             }
             return newState;
