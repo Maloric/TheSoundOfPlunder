@@ -1,11 +1,10 @@
-import { UnusedCssNg2Visitor } from 'codelyzer/noUnusedCssRule';
-import { InsightsViewModel } from './insights.viewmodel';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { UnusedCssNg2Visitor } from 'codelyzer/noUnusedCssRule';
+import { MockComponent } from 'ng2-mock-component';
 import { ReplaySubject } from 'rxjs/Rx';
 
-import { MakeTestComponent } from '../../helpers/testHelpers';
-
 import { InsightsPageComponent } from './insights.page';
+import { InsightsViewModel } from './insights.viewmodel';
 
 describe('InsightsPageComponent', () => {
   let component: InsightsPageComponent;
@@ -34,7 +33,7 @@ describe('InsightsPageComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         InsightsPageComponent,
-        MakeTestComponent('mockInsightsComponent', 'app-insights', ['hashtags'])
+        MockComponent({ selector: 'app-insights', inputs: ['hashtags'] })
       ], providers: [
         {
           provide: InsightsViewModel,

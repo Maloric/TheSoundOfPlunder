@@ -1,11 +1,10 @@
-import { UnusedCssNg2Visitor } from 'codelyzer/noUnusedCssRule';
-import { LogViewModel } from './log.viewmodel';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { UnusedCssNg2Visitor } from 'codelyzer/noUnusedCssRule';
+import { MockComponent } from 'ng2-mock-component';
 import { ReplaySubject } from 'rxjs/Rx';
 
-import { MakeTestComponent } from '../../helpers/testHelpers';
-
 import { LogPageComponent } from './log.page';
+import { LogViewModel } from './log.viewmodel';
 
 describe('LogPageComponent', () => {
   let component: LogPageComponent;
@@ -31,7 +30,7 @@ describe('LogPageComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         LogPageComponent,
-        MakeTestComponent('mockLogComponent', 'app-log', ['tweets'])
+        MockComponent({ selector: 'app-log', inputs: ['tweets'] })
       ], providers: [
         {
           provide: LogViewModel,

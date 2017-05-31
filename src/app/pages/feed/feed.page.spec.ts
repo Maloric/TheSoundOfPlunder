@@ -1,10 +1,9 @@
-import { UnusedCssNg2Visitor } from 'codelyzer/noUnusedCssRule';
-import { FeedViewModel } from './feed.viewmodel';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { UnusedCssNg2Visitor } from 'codelyzer/noUnusedCssRule';
+import { MockComponent } from 'ng2-mock-component';
 import { ReplaySubject } from 'rxjs/Rx';
 
-import { MakeTestComponent } from '../../helpers/testHelpers';
-
+import { FeedViewModel } from './feed.viewmodel';
 import { FeedPageComponent } from './feed.page';
 
 describe('FeedPageComponent', () => {
@@ -31,7 +30,7 @@ describe('FeedPageComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         FeedPageComponent,
-        MakeTestComponent('mockFeedComponent', 'app-twitter-feed', ['tweets'])
+        MockComponent({ selector: 'app-twitter-feed', inputs: ['tweets'] })
       ], providers: [
         {
           provide: FeedViewModel,
