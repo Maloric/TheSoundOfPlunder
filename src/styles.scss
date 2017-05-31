@@ -45,12 +45,19 @@ header {
 }
 
 @media(max-width:768px) {
-  nav {
-    a {
+  header {
+    line-height: 30px;
+    .siteTitle {
       display: block;
-      &.active {
-        border-left: 2px solid $highlight;
-        border-bottom: 0;
+    }
+    nav {
+      display: block;
+      a {
+        display: block;
+        &.active {
+          border-left: 2px solid $highlight;
+          border-bottom: 0;
+        }
       }
     }
   }
