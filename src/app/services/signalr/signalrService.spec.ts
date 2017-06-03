@@ -28,11 +28,11 @@ describe('The SignalR service', () => {
     let mockTwitterHub = {
         client: {},
         server: {
-            startTwitterLive: jasmine.createSpy('startTwitterLiveSpy'),
-            stopTwitterLive: jasmine.createSpy('stopTwitterLiveSpy')
+            Register: jasmine.createSpy('RegisterSpy'),
+            Unregister: jasmine.createSpy('UnregisterSpy')
         }
     }
-    let startTwitterLiveSpy: any;
+    let RegisterSpy: any;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -83,15 +83,15 @@ describe('The SignalR service', () => {
         it('starts signalR', () => {
             expect(hubStartSpy).toHaveBeenCalled();
             expect(hubStartSpy).toHaveBeenCalledWith({ withCredentials: false });
-            expect(mockTwitterHub.server.startTwitterLive).toHaveBeenCalled();
-            expect(mockTwitterHub.server.startTwitterLive).toHaveBeenCalledTimes(1);
-            expect(mockTwitterHub.server.startTwitterLive).toHaveBeenCalledWith('test');
+            expect(mockTwitterHub.server.Register).toHaveBeenCalled();
+            expect(mockTwitterHub.server.Register).toHaveBeenCalledTimes(1);
+            expect(mockTwitterHub.server.Register).toHaveBeenCalledWith('test');
         });
 
         describe('and the query is updated again', () => {
             beforeEach(() => {
                 hubStartSpy.calls.reset();
-                mockTwitterHub.server.startTwitterLive.calls.reset();
+                mockTwitterHub.server.Register.calls.reset();
                 store.dispatch({
                     type: UPDATE_QUERY,
                     payload: 'test2'
@@ -99,11 +99,11 @@ describe('The SignalR service', () => {
             });
             it('stops the old stream and starts a new one', () => {
                 expect(hubStartSpy).not.toHaveBeenCalled();
-                expect(mockTwitterHub.server.stopTwitterLive).toHaveBeenCalled();
-                expect(mockTwitterHub.server.stopTwitterLive).toHaveBeenCalledTimes(1);
-                expect(mockTwitterHub.server.startTwitterLive).toHaveBeenCalled();
-                expect(mockTwitterHub.server.startTwitterLive).toHaveBeenCalledTimes(1);
-                expect(mockTwitterHub.server.startTwitterLive).toHaveBeenCalledWith('test2');
+                expect(mockTwitterHub.server.Unregister).toHaveBeenCalled();
+                expect(mockTwitterHub.server.Unregister).toHaveBeenCalledTimes(1);
+                expect(mockTwitterHub.server.Register).toHaveBeenCalled();
+                expect(mockTwitterHub.server.Register).toHaveBeenCalledTimes(1);
+                expect(mockTwitterHub.server.Register).toHaveBeenCalledWith('test2');
             });
         });
 

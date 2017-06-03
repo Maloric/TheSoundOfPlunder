@@ -81,13 +81,13 @@
     proxies['twitterHub'] = this.createHubProxy('twitterHub');
     proxies['twitterHub'].client = {};
     proxies['twitterHub'].server = {
-      startTwitterLive: function (searchTerms) {
+      Register: function (searchTerms) {
         console.log('searchTerms', searchTerms);
-        return proxies['twitterHub'].invoke.apply(proxies['twitterHub'], $.merge(["StartTwitterLive"], $.makeArray(arguments)));
+        return proxies['twitterHub'].invoke.apply(proxies['twitterHub'], $.merge(["Register"], $.makeArray(arguments)));
       },
 
-      stopTwitterLive: function (taskId) {
-        return proxies['twitterHub'].invoke.apply(proxies['twitterHub'], $.merge(["StopTwitterLive"], $.makeArray(arguments)));
+      Unregister: function (taskId) {
+        return proxies['twitterHub'].invoke.apply(proxies['twitterHub'], $.merge(["Unregister"], $.makeArray(arguments)));
       }
     };
 

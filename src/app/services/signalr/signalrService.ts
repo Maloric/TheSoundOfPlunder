@@ -51,11 +51,11 @@ export class SignalRService implements OnInit, OnDestroy {
 
     stop() {
         const $ = (<any>window).$;
-        (<any>window).$.connection.twitterHub.server.stopTwitterLive();
+        (<any>window).$.connection.twitterHub.server.Unregister();
     }
 
     serviceStarted(searchTerms) {
-        (<any>window).$.connection.twitterHub.server.startTwitterLive(searchTerms);
+        (<any>window).$.connection.twitterHub.server.Register(searchTerms);
     }
 
     updateTweet(tweet: any) {
