@@ -12,12 +12,18 @@ header {
   width: 100%;
   background: #333;
   padding: 5px;
+  .logo {
+    width: 60px;
+    display: inline-block;
+    margin: 0 0 0 $spacing;
+    vertical-align: middle;
+  }
   .siteTitle {
     display: inline-block;
     color: #FFF;
     font-size: 1.5em;
     text-transform: uppercase;
-    margin: 0 0 0 $spacing;
+    margin: 0;
     vertical-align: middle;
   }
   nav {
@@ -45,10 +51,8 @@ header {
 
 @media(max-width:768px) {
   header {
+    clear: both;
     line-height: 30px;
-    .siteTitle {
-      display: block;
-    }
     nav {
       display: block;
       a {
